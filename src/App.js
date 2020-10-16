@@ -15,12 +15,18 @@ function App() {
       .orderBy("complete", "desc")
       .onSnapshot((snapshot) => {
         setTodos(
-          snapshot.docs.map((doc) => ({ id: doc.id, todo: doc.data().todo, complete: doc.data().complete, type: doc.data().type }))
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            todo: doc.data().todo,
+            complete: doc.data().complete,
+            type: doc.data().type,
+          }))
         );
       });
   }, []);
   const [input, setInput] = useState("");
   const [type, setType] = useState("");
+  const [stage, setStage] = useState(null);
   const addTodo = (event) => {
     // Prevents the form from refreshing the page
     event.preventDefault();
@@ -29,13 +35,30 @@ function App() {
       todo: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       complete: false,
-      type: type
+      type: type,
     });
     // This will add the todo item to the db when the add btn is clicked
     setTodos([...todos, input]);
     setInput("");
-    setType("")
+    setType("");
   };
+
+  function updateStage(val) {
+    setStage(val)
+    db.collection("todos")
+      .where("complete", "!=", val)
+      .orderBy("complete", "desc")
+      .onSnapshot((snapshot) => {
+        setTodos(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            todo: doc.data().todo,
+            complete: doc.data().complete,
+            type: doc.data().type,
+          }))
+        );
+      });
+  }
 
   const handleChange = (event) => {
     setType(event.target.value);
@@ -44,8 +67,7 @@ function App() {
   return (
     <div className="App">
       <div className="overlay">
-        <h1>The simple TODO app</h1>
-        <h2>Built in React & Material-UI</h2>
+        <h1>TO-DO LIST</h1>
 
         <form onSubmit={addTodo} className="app_inputs">
           <TextField
@@ -75,12 +97,32 @@ function App() {
             type="submit"
             disabled={!type && !input}
             onClick={addTodo}
-            color="primary"
             variant="contained"
           >
             Add
           </Button>
         </form>
+          <hr className="divider"></hr>
+        <div className="app_filters">
+          <Button
+            variant="contained"
+            onClick={() => updateStage(null)}
+          >
+            All
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => updateStage(true)}
+          >
+            Pending
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => updateStage(false)}
+          >
+            Complete
+          </Button>
+        </div>
         <div>
           <ul className="list">
             {todos.map((todo) => (

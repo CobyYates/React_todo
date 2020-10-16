@@ -6,17 +6,15 @@ import {
   List,
   ListItem,
   Button,
-  ListItemAvatar,
   ListItemText,
   Chip,
   Checkbox,
   TextField,
-  Divider,
   Modal,
-  FormControlLabel,
 } from "@material-ui/core";
 import "./ToDo.css";
 import { makeStyles } from "@material-ui/core/styles";
+import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -26,8 +24,14 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    display: "flex",
+    flexDirection: "column"
   },
+  chips: {
+    color: red,
+  }
 }));
+
 
 function ToDo(props) {
   const classes = useStyles();
@@ -46,19 +50,9 @@ function ToDo(props) {
   };
   const [open, setOpen] = useState(false);
 
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
-
   function handleChange(evt) {
     const value = evt.target.checked;
     setCheck(() => (checked = value));
-    // const value =
-    //   evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;
-    // setCheck({
-    //   ...checked,
-    //   [evt.target.name]: value,
-    // });
     updateTodo();
   }
 
@@ -76,11 +70,10 @@ function ToDo(props) {
               label="ToDo Item..."
               variant="filled"
               placeholder={props.todo.todo}
-              fullWidth
               value={input}
               onChange={(event) => setInput(event.target.value)}
             />
-            <Button color="secondary" variant="contained" onClick={updateTodo}>
+            <Button className="editBtn_icon" variant="contained" onClick={updateTodo}>
               Update
             </Button>
           </div>
@@ -91,6 +84,7 @@ function ToDo(props) {
           <form onSubmit={updateTodo} className="todo_checkbox">
             <Checkbox
               checked={props.todo.complete}
+              className="todo_checkbox"
               onChange={handleChange}
               inputProps={{ "aria-label": "primary checkbox" }}
             />
@@ -100,14 +94,13 @@ function ToDo(props) {
             <Chip size="small" label={props.todo.type}  className="todo_chip"/>
           </div>
           <div className="todo_icons">
-            <EditIcon className="todo_icon" onClick={(e) => setOpen(true)} />
+            <EditIcon className="todo_icon edit_icon" onClick={(e) => setOpen(true)} />
             <DeleteIcon
               onClick={(event) =>
                 db.collection("todos").doc(props.todo.id).delete()
               }
-              color="secondary"
               variant="contained"
-              className="todo_icon"
+              className="todo_icon delete_icon"
             />
           </div>
         </ListItem>

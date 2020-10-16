@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: rgba(39, 39, 39, 0.473);
 }
 
 .todo_icon {
@@ -10,8 +11,13 @@
     cursor: pointer;
 }
 
+.delete_icon {
+    color: rgb(255, 130, 130);
+}
+
 .todo_modal {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -20,17 +26,55 @@
     display: flex;
 }
 
+.edit_icon {
+    /* color:rgb(231, 156, 94); */
+}
+
 .todo_type {
     display: flex;
     flex-direction: column;
     margin-right: 70px;
-    width: 70%;
+    width: 80%;
 }
 
 .todo_chip {
     width: 100px;
 }
 
+.MuiFilledInput-root {
+    background-color: #e0e0e0;
+}
+
+.MuiCheckbox-colorSecondary.Mui-checked {
+    color:rgb(231, 156, 94)!important;
+}
+
+.MuiSelect-filled.MuiSelect-filled {
+    background-color: #e0e0e0;
+}
+
 .todo_checkbox {
     width: 6%;
+}
+
+.editBtn_icon.MuiButton-contained  {
+    background-color: rgb(255, 130, 130);
+}
+
+
+@media only screen and (min-width: 600px) {
+    .todo_list {
+    width: 90vw;
+    max-width: 700px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(39, 39, 39, 0.473);
+}
+}
+
+@media only screen and (max-width: 600px) {
+    .todo_list {
+        width: 90vw;
+    }
 }
