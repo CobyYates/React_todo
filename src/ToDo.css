@@ -1,3 +1,36 @@
-/* .todo_list {
-    text-align: center;
-} */
+.todo_list {
+    width: 40vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo_icon {
+    padding-left: auto;
+    cursor: pointer;
+}
+
+.todo_modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo_icons {
+    display: flex;
+}
+
+.todo_type {
+    display: flex;
+    flex-direction: column;
+    margin-right: 70px;
+    width: 70%;
+}
+
+.todo_chip {
+    width: 100px;
+}
+
+.todo_checkbox {
+    width: 6%;
+}
