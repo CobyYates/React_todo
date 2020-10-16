@@ -1,9 +1,4 @@
 @media only screen and (min-width: 600px) {
-
-  .divider {
-    width: 100vw;
-  }
-  
   .App {
     background: url("https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     height: 100%;
@@ -24,11 +19,11 @@
   html {
     color: #e0e0e0;
   }
-  
+
   .list {
-    margin-left: auto;
+    padding-left: 0;
   }
-  
+
   .app_inputs {
     width: 100vw;
     display: flex;
@@ -36,12 +31,12 @@
     flex-direction: column;
     justify-content: space-around;
   }
-  
+
   #todo {
     width: 50vw;
     background-color: #e0e0e0;
   }
-  
+
   .app_type {
     width: 45%;
     max-width: 200px;
@@ -49,6 +44,10 @@
     margin-bottom: 5px;
     background-color: #e0e0e0;
   }
+}
+
+.divider {
+  width: 80vw;
 }
 
 h1 {
